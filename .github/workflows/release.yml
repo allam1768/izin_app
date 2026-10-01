@@ -1,0 +1,65 @@
+name: Build and Release APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run static analysis
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Copy & rename APK artifact
+        run: cp build/app/outputs/flutter-apk/app-release.apk izin-app-release.apk
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: izin-app-release.apk
+          name: Release ${{ github.ref_name }}
+          body: |
+            ## Pembaruan Aplikasi Izin Mahasiswa IDN (${{ github.ref_name }})
+
+            - Pembuatan format resmi Surat Izin Mahasiswa Politeknik IDN
+            - Fitur deteksi & auto-update otomatis dari rilis GitHub
+            - Ekspor dan cetak dokumen PDF langsung
+            
+            ### Panduan Instalasi:
+            1. Unduh file `izin-app-release.apk` di bawah.
+            2. Buka file di perangkat Android dan izinkan instalasi dari sumber tidak dikenal jika diminta.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

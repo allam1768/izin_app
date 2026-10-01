@@ -1,0 +1,46 @@
+name: izin_app
+description: "Aplikasi Surat Izin Mahasiswa Politeknik IDN"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^2.6.1
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^8.2.1
+  pdf: ^3.12.0
+  printing: ^5.14.3
+  image_picker: ^1.2.3
+  shared_preferences: ^2.2.2
+  intl: ^0.20.2
+  http: ^1.6.0
+  package_info_plus: ^10.2.1
+  url_launcher: ^6.3.2
+  flutter_svg: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/dokumen/
+    - assets/icon/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  min_sdk_android: 21
+
