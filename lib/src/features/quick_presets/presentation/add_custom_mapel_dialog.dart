@@ -35,15 +35,15 @@ class _AddCustomMapelDialogState extends State<AddCustomMapelDialog> {
   final _mapelCtrl = TextEditingController();
   final _mentorCtrl = TextEditingController();
 
-  final List<int> _iconOptions = [
-    0xe115, // school
-    0xe1d7, // computer
-    0xe80c, // code
-    0xe3e7, // menu_book
-    0xf20a, // record_voice_over
-    0xe156, // build
+  final List<IconData> _iconOptions = const [
+    Icons.school_rounded,
+    Icons.computer_rounded,
+    Icons.code_rounded,
+    Icons.menu_book_rounded,
+    Icons.record_voice_over_rounded,
+    Icons.build_rounded,
   ];
-  int _selectedIcon = 0xe115;
+  IconData _selectedIcon = Icons.school_rounded;
 
   final List<int> _colorOptions = [
     0xFF1F81FF, // Blue
@@ -122,10 +122,10 @@ class _AddCustomMapelDialogState extends State<AddCustomMapelDialog> {
               SizedBox(height: 8.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: _iconOptions.map((code) {
-                  final isSel = _selectedIcon == code;
+                children: _iconOptions.map((iconData) {
+                  final isSel = _selectedIcon == iconData;
                   return InkWell(
-                    onTap: () => setState(() => _selectedIcon = code),
+                    onTap: () => setState(() => _selectedIcon = iconData),
                     child: Container(
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
@@ -138,7 +138,7 @@ class _AddCustomMapelDialogState extends State<AddCustomMapelDialog> {
                             : null,
                       ),
                       child: Icon(
-                        IconData(code, fontFamily: 'MaterialIcons'),
+                        iconData,
                         size: 20.w,
                         color: isSel ? Color(_selectedColor) : Colors.grey.shade700,
                       ),
@@ -186,7 +186,7 @@ class _AddCustomMapelDialogState extends State<AddCustomMapelDialog> {
             await widget.presetService.addCustomPreset(
               namaMapel: _mapelCtrl.text.trim(),
               namaMentor: _mentorCtrl.text.trim(),
-              iconCodePoint: _selectedIcon,
+              iconCodePoint: _selectedIcon.codePoint,
               colorValue: _selectedColor,
             );
             if (context.mounted) Navigator.pop(context);

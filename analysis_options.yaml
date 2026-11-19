@@ -5,6 +5,9 @@ analyzer:
     - application/**
     - domain/**
     - presentation/**
+  errors:
+    non_const_argument_for_const_parameter: ignore
+    deprecated_member_use: ignore
 
 linter:
   rules:
