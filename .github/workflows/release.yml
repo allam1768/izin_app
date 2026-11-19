@@ -39,7 +39,7 @@ jobs:
         run: flutter test
 
       - name: Build Android APK
-        run: flutter build apk --release
+        run: flutter build apk --release --no-tree-shake-icons
 
       - name: Copy & rename APK artifact
         run: cp build/app/outputs/flutter-apk/app-release.apk izin-app-release.apk

@@ -20,7 +20,40 @@ class MapelPresetModel {
     this.isDefault = false,
   });
 
-  IconData get icon => IconData(iconCodePoint, fontFamily: 'MaterialIcons');
+  IconData get icon => resolveIcon(iconCodePoint);
+
+  static IconData resolveIcon(int code) {
+    if (code == 0xf05a1 ||
+        code == Icons.translate_rounded.codePoint ||
+        code == Icons.language_rounded.codePoint) {
+      return Icons.translate_rounded;
+    }
+    if (code == 0xe3e7 || code == Icons.menu_book_rounded.codePoint) {
+      return Icons.menu_book_rounded;
+    }
+    if (code == 0xe934 || code == Icons.mosque_rounded.codePoint) {
+      return Icons.mosque_rounded;
+    }
+    if (code == Icons.auto_stories_rounded.codePoint) {
+      return Icons.auto_stories_rounded;
+    }
+    if (code == Icons.school_rounded.codePoint || code == 0xe115) {
+      return Icons.school_rounded;
+    }
+    if (code == Icons.computer_rounded.codePoint || code == 0xe1d7) {
+      return Icons.computer_rounded;
+    }
+    if (code == Icons.code_rounded.codePoint || code == 0xe80c) {
+      return Icons.code_rounded;
+    }
+    if (code == Icons.record_voice_over_rounded.codePoint || code == 0xf20a) {
+      return Icons.record_voice_over_rounded;
+    }
+    if (code == Icons.build_rounded.codePoint || code == 0xe156) {
+      return Icons.build_rounded;
+    }
+    return Icons.school_rounded;
+  }
   Color get color => Color(colorValue);
 
   Map<String, dynamic> toMap() {
