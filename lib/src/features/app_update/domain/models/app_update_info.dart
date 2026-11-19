@@ -8,6 +8,7 @@ class AppUpdateInfo {
   final String releaseUrl;
   final DateTime? publishedAt;
   final bool isUpdateAvailable;
+  final bool isForceUpdate;
 
   const AppUpdateInfo({
     required this.currentVersion,
@@ -18,6 +19,7 @@ class AppUpdateInfo {
     required this.releaseUrl,
     this.publishedAt,
     required this.isUpdateAvailable,
+    this.isForceUpdate = false,
   });
 
   factory AppUpdateInfo.upToDate({required String currentVersion}) {
@@ -29,6 +31,7 @@ class AppUpdateInfo {
       downloadUrl: '',
       releaseUrl: '',
       isUpdateAvailable: false,
+      isForceUpdate: false,
     );
   }
 }

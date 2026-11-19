@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:izin_app/main.dart';
 import 'package:izin_app/src/features/app_update/application/app_update_service.dart';
 import 'package:izin_app/src/features/app_update/domain/models/app_update_info.dart';
@@ -14,6 +15,7 @@ class FakeAppUpdateService extends AppUpdateService {
 
 void main() {
   testWidgets('IzinApp smoke test', (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -22,7 +24,8 @@ void main() {
         child: const IzinApp(),
       ),
     );
-    await tester.pumpAndSettle();
-    expect(find.text('Buat Surat Izin Kelas'), findsOneWidget);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    expect(find.text('Surat Izin Mahasiswa'), findsOneWidget);
   });
 }

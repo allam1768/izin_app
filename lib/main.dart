@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'src/features/surat_izin/presentation/surat_izin_form_page.dart';
+import 'src/features/dashboard/presentation/dashboard_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +40,7 @@ class IzinApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const SuratIzinFormPage(),
+      child: const DashboardPage(),
     );
   }
 }

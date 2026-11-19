@@ -48,17 +48,22 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: izin-app-release.apk
-          name: Release ${{ github.ref_name }}
+          name: "[URGENT] Release ${{ github.ref_name }}"
           body: |
-            ## Pembaruan Aplikasi Izin Mahasiswa IDN (${{ github.ref_name }})
+            ## [URGENT] Pembaruan Wajib Aplikasi Surat Izin Mahasiswa IDN (${{ github.ref_name }})
 
-            - Pembuatan format resmi Surat Izin Mahasiswa Politeknik IDN
-            - Fitur deteksi & auto-update otomatis dari rilis GitHub
-            - Ekspor dan cetak dokumen PDF langsung
-            
+            Pembaruan versi ini bersifat **WAJIB / PENTING** untuk seluruh mahasiswa Politeknik IDN.
+
+            ### Apa yang Baru di ${{ github.ref_name }}:
+            - **Shortcut & Preset Mata Kuliah IDN**: Akses cepat izin Bahasa Inggris, Diniyah, Tahfidz, dan tambah mapel kustom langsung dari dashboard.
+            - **Bank Tanda Tangan Digital**: Simpan dan kelola tanda tangan mahasiswa & wali/ortu tanpa perlu menggambar ulang.
+            - **Multi-Profil Mahasiswa**: Kelola data mahasiswa dan beralih antar teman (khusus prodi TRPL, TRKJ, TRMG).
+            - **Dashboard Solid Flat**: Desain bersih modern tanpa gradien dan tanpa ornamen berlebih.
+            - **Sistem Pembaruan Wajib (Urgent Update Pop-up)**: Notifikasi pembaruan langsung terdeteksi otomatis saat aplikasi dibuka.
+
             ### Panduan Instalasi:
-            1. Unduh file `izin-app-release.apk` di bawah.
-            2. Buka file di perangkat Android dan izinkan instalasi dari sumber tidak dikenal jika diminta.
+            1. Unduh file `izin-app-release.apk` di bawah ini.
+            2. Buka dan instal berkas APK di perangkat Android Anda untuk memperbarui aplikasi.
           draft: false
           prerelease: false
         env:

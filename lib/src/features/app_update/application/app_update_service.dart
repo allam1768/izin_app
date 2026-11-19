@@ -61,6 +61,13 @@ class AppUpdateService {
           localBuildNumber: currentBuild,
         );
 
+        final isForceUpdate = isNewer &&
+            checkIsForceUpdate(
+              title: releaseTitle,
+              body: body,
+              tagName: tagName,
+            );
+
         return AppUpdateInfo(
           currentVersion: currentVersion,
           latestVersion: tagName.replaceFirst(RegExp(r'^[vV]'), ''),
@@ -70,6 +77,7 @@ class AppUpdateService {
           releaseUrl: releaseUrl,
           publishedAt: publishedAt,
           isUpdateAvailable: isNewer,
+          isForceUpdate: isForceUpdate,
         );
       } else if (response.statusCode == 404) {
         // Belum ada rilis di GitHub repository
@@ -84,6 +92,41 @@ class AppUpdateService {
       debugPrint('[AppUpdateService] Error saat cek update: $e\n$stackTrace');
     }
     return null;
+  }
+
+  /// Mengecek apakah rilis ini merupakan pembaruan wajib / darurat (Force Update)
+  static bool checkIsForceUpdate({
+    required String title,
+    required String body,
+    String tagName = '',
+  }) {
+    final lowerTitle = title.toLowerCase();
+    final lowerBody = body.toLowerCase();
+    final lowerTag = tagName.toLowerCase();
+    const forceKeywords = [
+      '[urgent]',
+      '(urgent)',
+      'urgent',
+      'force update',
+      '[force]',
+      '(force)',
+      '[mandatory]',
+      '(mandatory)',
+      '[wajib]',
+      '(wajib)',
+      'wajib update',
+      'wajib perbarui',
+      'pembaruan wajib',
+    ];
+
+    for (final kw in forceKeywords) {
+      if (lowerTitle.contains(kw) ||
+          lowerBody.contains(kw) ||
+          lowerTag.contains(kw)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /// Membandingkan versi remote dengan versi lokal
